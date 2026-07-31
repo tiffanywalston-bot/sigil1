@@ -208,3 +208,17 @@ export class Clouds {
         ctx.stroke();
 
     }
+        update(deltaTime = 0.016) {
+
+        // Reserved for future harmonic cloud motion.
+        // Version 1 remains structurally static.
+
+    }
+
+    setOpacity(value) {
+
+        this.defaultOpacity = value;
+
+    }
+
+}
