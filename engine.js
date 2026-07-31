@@ -1,11 +1,12 @@
 /**
  * ============================================================
  * SIGIL1 Engine
- * Version 1.0
+ * Version 2.0
  * ============================================================
  */
 
 import { Renderer } from "./renderer.js";
+import { Animation } from "./animation.js";
 
 export class Engine {
 
@@ -19,9 +20,12 @@ export class Engine {
 
         this.renderer = new Renderer(this.canvas);
 
+        this.animation = new Animation();
+
         this.running = false;
 
         this.lastTime = 0;
+
     }
 
     start() {
@@ -50,7 +54,7 @@ export class Engine {
 
         this.update(delta);
 
-        this.renderer.render();
+        this.renderer.render(this.animation);
 
         requestAnimationFrame(this.loop.bind(this));
 
@@ -58,21 +62,7 @@ export class Engine {
 
     update(delta) {
 
-        // Future Engine Logic
-
-        // Identity Layer
-
-        // Intention Layer
-
-        // Harmonic Layer
-
-        // Emotional Layer
-
-        // Pregnancy Harmonic
-
-        // WAV Synchronization
-
-        // Subliminal Synchronization
+        this.animation.update(delta);
 
     }
 
