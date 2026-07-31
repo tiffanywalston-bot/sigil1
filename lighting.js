@@ -164,3 +164,11 @@ export class Lighting {
         this.highlightStrength = value;
 
     }
+        update() {
+
+        // Reserved for future dynamic lighting.
+        // Gold Master Version 1 remains static.
+
+    }
+
+}
