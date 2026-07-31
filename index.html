@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>SIGIL1</title>
+
+    <link rel="stylesheet"
+          href="style.css">
+
+</head>
+
+<body>
+
+    <!-- Main Canvas -->
+
+    <canvas id="sigil1"></canvas>
+
+    <!-- Loading Overlay -->
+
+    <div id="loading">
+
+        <div class="logo">
+
+            SIGIL1
+
+        </div>
+
+        <div class="status">
+
+            Initializing Engine...
+
+        </div>
+
+    </div>
+
+    <script type="module">
+
+        import { Engine } from "./engine.js";
+
+        const engine = new Engine();
+
+        window.addEventListener("load", () => {
+
+            document
+                .getElementById("loading")
+                .style.display = "none";
+
+            engine.start();
+
+        });
+
+    </script>
+
+</body>
+
+</html>
