@@ -249,3 +249,61 @@ export class Chains {
         ctx.fill();
 
     }
+        update(deltaTime = 0.016) {
+
+        // Reserved for future chain animation
+        // (sway, shimmer, pendulum motion)
+
+    }
+
+    setOpacity(value) {
+
+        this.defaultOpacity = value;
+
+    }
+
+    show(id) {
+
+        const chain = this.chains.find(c => c.id === id);
+
+        if (chain) {
+
+            chain.visible = true;
+
+        }
+
+    }
+
+    hide(id) {
+
+        const chain = this.chains.find(c => c.id === id);
+
+        if (chain) {
+
+            chain.visible = false;
+
+        }
+
+    }
+
+    showAll() {
+
+        for (const chain of this.chains) {
+
+            chain.visible = true;
+
+        }
+
+    }
+
+    hideAll() {
+
+        for (const chain of this.chains) {
+
+            chain.visible = false;
+
+        }
+
+    }
+
+}
