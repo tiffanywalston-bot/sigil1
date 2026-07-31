@@ -1,12 +1,14 @@
 /**
  * ============================================================
  * SIGIL1 Renderer
- * Version 1.0
- * Reads Scene and renders Gold Master
+ * Version 2.0
  * ============================================================
  */
 
 import { Scene } from "./scene.js";
+import { Geometry } from "./geometry.js";
+import { Background } from "./background.js";
+import { Rings } from "./rings.js";
 
 export class Renderer {
 
@@ -15,9 +17,16 @@ export class Renderer {
         this.canvas = canvas;
         this.ctx = canvas.getContext("2d");
 
+        this.width = 0;
+        this.height = 0;
+
         this.resize();
 
-        window.addEventListener("resize", () => this.resize());
+        window.addEventListener(
+            "resize",
+            () => this.resize()
+        );
+
     }
 
     resize() {
@@ -27,15 +36,26 @@ export class Renderer {
 
         this.width = this.canvas.width;
         this.height = this.canvas.height;
+
     }
 
-    render() {
+    render(animation) {
 
         this.clear();
 
-        this.drawBackground();
+        Background.draw(
+            this.ctx,
+            this.width,
+            this.height
+        );
 
-        this.drawSource();
+        Rings.draw(
+            this.ctx,
+            this.width / 2,
+            this.height * 0.43
+        );
+
+        this.drawSource(animation);
 
         this.drawCoreAxis();
 
@@ -47,131 +67,100 @@ export class Renderer {
 
     clear() {
 
-        this.ctx.fillStyle = Scene.colors.background;
-        this.ctx.fillRect(0,0,this.width,this.height);
+        this.ctx.clearRect(
+            0,
+            0,
+            this.width,
+            this.height
+        );
 
     }
-
-    drawBackground() {
-
-        this.ctx.fillStyle = "#04060F";
-        this.ctx.fillRect(0,0,this.width,this.height);
-
-    }
-
-    drawSource() {
+    drawSource(animation) {
 
         const s = Scene.source;
+
+        const pulse = animation
+            ? animation.breathe(1, 5)
+            : 0;
 
         const x = s.x * this.width;
         const y = s.y * this.height;
 
-        this.ctx.beginPath();
+        Geometry.drawGlow(
+            this.ctx,
+            x,
+            y,
+            s.radius + pulse,
+            Scene.colors.gold
+        );
 
-        this.ctx.arc(
+        Geometry.drawFilledCircle(
+            this.ctx,
             x,
             y,
             s.radius,
-            0,
-            Math.PI*2
+            Scene.colors.gold
         );
-
-        this.ctx.fillStyle = Scene.colors.gold;
-
-        this.ctx.fill();
 
     }
 
     drawCoreAxis() {
 
-        const a = Scene.axis;
+        const axis = Scene.axis;
 
-        const x = a.x * this.width;
+        const x = axis.x * this.width;
 
-        this.ctx.strokeStyle = Scene.colors.gold;
-
-        this.ctx.lineWidth = 2;
-
-        this.ctx.beginPath();
-
-        this.ctx.moveTo(
+        Geometry.drawAxis(
+            this.ctx,
             x,
-            a.top * this.height
+            axis.top * this.height,
+            axis.bottom * this.height,
+            Scene.colors.gold
         );
-
-        this.ctx.lineTo(
-            x,
-            a.bottom * this.height
-        );
-
-        this.ctx.stroke();
 
     }
 
     drawGeometry() {
 
         const left = Scene.geometry.leftIdentity;
-
         const right = Scene.geometry.rightIdentity;
+        const core = Scene.geometry.engineCore;
+        const magnetic = Scene.geometry.magneticField;
 
-        this.drawCircle(left);
-
-        this.drawCircle(right);
-
-    }
-
-    drawCircle(data) {
-
-        this.ctx.beginPath();
-
-        this.ctx.arc(
-
-            data.x * this.width,
-
-            data.y * this.height,
-
-            data.radius,
-
-            0,
-
-            Math.PI*2
-
+        Geometry.drawCircle(
+            this.ctx,
+            left.x * this.width,
+            left.y * this.height,
+            left.radius,
+            Scene.colors.blue,
+            2
         );
 
-        this.ctx.strokeStyle = Scene.colors.blue;
+        Geometry.drawCircle(
+            this.ctx,
+            right.x * this.width,
+            right.y * this.height,
+            right.radius,
+            Scene.colors.blue,
+            2
+        );
 
-        this.ctx.lineWidth = 2;
+        Geometry.drawCircle(
+            this.ctx,
+            core.x * this.width,
+            core.y * this.height,
+            core.radius,
+            Scene.colors.gold,
+            3
+        );
 
-        this.ctx.stroke();
-
-    }
-
-    drawPregnancyJewel() {
-
-        const jewel = Scene.pregnancyHarmonic;
-
-        const x = jewel.x * this.width;
-
-        const y = jewel.y * this.height;
-
-        this.ctx.beginPath();
-
-        this.ctx.moveTo(x, y-90);
-
-        this.ctx.lineTo(x+55,y);
-
-        this.ctx.lineTo(x,y+90);
-
-        this.ctx.lineTo(x-55,y);
-
-        this.ctx.closePath();
-
-        this.ctx.strokeStyle = Scene.colors.gold;
-
-        this.ctx.lineWidth = 2;
-
-        this.ctx.stroke();
+        Geometry.drawCircle(
+            this.ctx,
+            magnetic.x * this.width,
+            magnetic.y * this.height,
+            magnetic.radius,
+            Scene.colors.purple,
+            2
+        );
 
     }
-
-}
