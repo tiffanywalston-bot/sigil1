@@ -168,3 +168,121 @@ export class Renderer {
         );
 
     }
+        drawCoreAxis() {
+
+        const axis = Scene.axis;
+
+        Geometry.drawAxis(
+            this.ctx,
+            axis.x * this.width,
+            axis.top * this.height,
+            axis.bottom * this.height,
+            Scene.colors.gold
+        );
+
+    }
+
+    drawGeometry() {
+
+        const left = Scene.geometry.leftIdentity;
+
+        const right = Scene.geometry.rightIdentity;
+
+        const core = Scene.geometry.engineCore;
+
+        const magnetic = Scene.geometry.magneticField;
+
+        Geometry.drawCircle(
+            this.ctx,
+            left.x * this.width,
+            left.y * this.height,
+            left.radius,
+            Scene.colors.blue,
+            2
+        );
+
+        Geometry.drawCircle(
+            this.ctx,
+            right.x * this.width,
+            right.y * this.height,
+            right.radius,
+            Scene.colors.blue,
+            2
+        );
+
+        Geometry.drawCircle(
+            this.ctx,
+            core.x * this.width,
+            core.y * this.height,
+            core.radius,
+            Scene.colors.gold,
+            3
+        );
+
+        Geometry.drawCircle(
+            this.ctx,
+            magnetic.x * this.width,
+            magnetic.y * this.height,
+            magnetic.radius,
+            Scene.colors.purple,
+            2
+        );
+
+        SacredGeometry.drawFlowerOfLife(
+            this.ctx,
+            core.x * this.width,
+            core.y * this.height,
+            40
+        );
+
+        SacredGeometry.drawConnectionLines(
+            this.ctx,
+            core.x * this.width,
+            core.y * this.height,
+            40
+        );
+
+        SacredGeometry.drawCenterNode(
+            this.ctx,
+            core.x * this.width,
+            core.y * this.height
+        );
+
+    }
+
+    drawPregnancyJewel() {
+
+        const jewel = Scene.pregnancyHarmonic;
+
+        const x = jewel.x * this.width;
+
+        const y = jewel.y * this.height;
+
+        Geometry.drawDiamond(
+            this.ctx,
+            x,
+            y,
+            90,
+            130,
+            Scene.colors.gold
+        );
+
+        Geometry.drawGlow(
+            this.ctx,
+            x,
+            y,
+            10,
+            Scene.colors.gold
+        );
+
+        Geometry.drawFilledCircle(
+            this.ctx,
+            x,
+            y,
+            4,
+            "#FFFFFF"
+        );
+
+    }
+
+}
