@@ -1,7 +1,7 @@
 /**
  * ============================================================
  * SIGIL1 Renderer
- * Version 2.0
+ * Version 3.0
  * ============================================================
  */
 
@@ -9,6 +9,7 @@ import { Scene } from "./scene.js";
 import { Geometry } from "./geometry.js";
 import { Background } from "./background.js";
 import { Rings } from "./rings.js";
+import { SacredGeometry } from "./sacredgeometry.js";
 
 export class Renderer {
 
@@ -56,11 +57,8 @@ export class Renderer {
         );
 
         this.drawSource(animation);
-
         this.drawCoreAxis();
-
         this.drawGeometry();
-
         this.drawPregnancyJewel();
 
     }
@@ -75,6 +73,7 @@ export class Renderer {
         );
 
     }
+
     drawSource(animation) {
 
         const s = Scene.source;
@@ -108,11 +107,9 @@ export class Renderer {
 
         const axis = Scene.axis;
 
-        const x = axis.x * this.width;
-
         Geometry.drawAxis(
             this.ctx,
-            x,
+            axis.x * this.width,
             axis.top * this.height,
             axis.bottom * this.height,
             Scene.colors.gold
@@ -163,7 +160,28 @@ export class Renderer {
             2
         );
 
-    }
+        // Sacred Geometry
+        SacredGeometry.drawFlowerOfLife(
+            this.ctx,
+            core.x * this.width,
+            core.y * this.height,
+            40
+        );
+
+        SacredGeometry.drawConnectionLines(
+            this.ctx,
+            core.x * this.width,
+            core.y * this.height,
+            40
+        );
+
+        SacredGeometry.drawCenterNode(
+            this.ctx,
+            core.x * this.width,
+            core.y * this.height
+        );
+          }
+
     drawPregnancyJewel() {
 
         const jewel = Scene.pregnancyHarmonic;
@@ -186,6 +204,14 @@ export class Renderer {
             y,
             10,
             Scene.colors.gold
+        );
+
+        Geometry.drawFilledCircle(
+            this.ctx,
+            x,
+            y,
+            4,
+            "#FFFFFF"
         );
 
     }
