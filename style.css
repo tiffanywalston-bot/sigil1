@@ -1,0 +1,152 @@
+/*
+============================================================
+SIGIL1
+Gold Master Style Sheet
+Version 1.0
+============================================================
+*/
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,
+body{
+
+    width:100%;
+    height:100%;
+
+    overflow:hidden;
+
+    background:#04060F;
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+}
+
+/* Main Canvas */
+
+#sigil1{
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    display:block;
+
+    background:
+        radial-gradient(
+            circle,
+            #08111F 0%,
+            #050814 45%,
+            #020307 100%
+        );
+
+}
+
+/* Loading Screen */
+
+#loading{
+
+    position:fixed;
+
+    inset:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:#04060F;
+
+    z-index:1000;
+
+}
+
+/* Logo */
+
+.logo{
+
+    color:#E9C46A;
+
+    font-size:54px;
+
+    font-weight:700;
+
+    letter-spacing:8px;
+
+    text-shadow:
+
+        0 0 8px #E9C46A,
+
+        0 0 18px #E9C46A,
+
+        0 0 32px rgba(233,196,106,.45);
+
+}
+
+/* Status */
+
+.status{
+
+    margin-top:24px;
+
+    color:white;
+
+    opacity:.75;
+
+    font-size:15px;
+
+    letter-spacing:2px;
+
+}
+
+/* Glow Utility */
+
+.glow-gold{
+
+    box-shadow:
+
+        0 0 10px #E9C46A,
+
+        0 0 20px #E9C46A,
+
+        0 0 40px rgba(233,196,106,.4);
+
+}
+
+/* Fade In */
+
+.fade-in{
+
+    animation:fadeIn 1.5s ease;
+
+}
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+    }
+
+    to{
+
+        opacity:1;
+
+    }
+
+}
