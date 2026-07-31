@@ -164,3 +164,30 @@ export class Renderer {
         );
 
     }
+    drawPregnancyJewel() {
+
+        const jewel = Scene.pregnancyHarmonic;
+
+        const x = jewel.x * this.width;
+        const y = jewel.y * this.height;
+
+        Geometry.drawDiamond(
+            this.ctx,
+            x,
+            y,
+            90,
+            130,
+            Scene.colors.gold
+        );
+
+        Geometry.drawGlow(
+            this.ctx,
+            x,
+            y,
+            10,
+            Scene.colors.gold
+        );
+
+    }
+
+}
