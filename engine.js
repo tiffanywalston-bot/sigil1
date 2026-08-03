@@ -3,6 +3,35 @@
  * SIGIL1 Engine
  * Version 2.0
  * ============================================================
+ *
+ * Scope note (repository-verified):
+ * This file orchestrates only the subsystems that currently
+ * exist as runnable browser JS in this repository:
+ *   - Animation  (./animation.js)
+ *   - Renderer   (./renderer.js)
+ *
+ * The following repository subsystems exist ONLY as .ts files
+ * with no build/compile step present anywhere in the repo
+ * (no package.json, tsconfig, or bundler config), and are
+ * therefore NOT importable by this browser-native engine.js
+ * as the repository currently stands. They are intentionally
+ * NOT wired in below, to avoid fabricating non-existent
+ * runtime imports:
+ *   - capabilities/ (CapabilityRegistry, CapabilityIndex, etc.)
+ *   - validation/
+ *   - models/
+ *   - interfaces/ (EngineInterfaces, RendererInterfaces, etc. —
+ *     these are type-only and produce no runtime values even
+ *     if compiled)
+ *   - UniverseTypes / UniverseConstants (Universe subsystem)
+ *   - SessionTypes (Session subsystem)
+ *
+ * Until one of those is resolved (a build step is added, or
+ * these are ported to plain JS), Engine cannot legitimately
+ * call initializeCapabilities(), initializeSessions(),
+ * initializeIdentity(), initializeUniverse(), or
+ * initializeValidation() — there is nothing real to call.
+ * ============================================================
  */
 
 import { Renderer } from "./renderer.js";
@@ -41,6 +70,19 @@ export class Engine {
     stop() {
 
         this.running = false;
+
+    }
+
+    /**
+     * Shutdown coordination.
+     * Stops the run loop. No capability/session/identity/
+     * universe shutdown is invoked here, since none of those
+     * subsystems have a runnable (non-TypeScript) form in this
+     * repository yet — see scope note above.
+     */
+    shutdown() {
+
+        this.stop();
 
     }
 
