@@ -15,7 +15,7 @@ export class ValidationCapability implements CapabilityDefinition {
     description: "Core validation capability.",
     version: "GMC-1.0.0",
     defaultEnabled: true,
-  };
+  } as const;
   readonly enabled = true;
   readonly dependencies = [] as const;
   readonly status: CapabilityStatus = {
