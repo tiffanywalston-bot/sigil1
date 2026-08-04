@@ -27,7 +27,7 @@
  * HarmonicTypes.ts.
  */
 
-import type { Frequency, FrequencyRange } from "./HarmonicTypes";
+import type { Frequency, FrequencyRange } from "../HarmonicTypes";
 
 function assertPositive(value: number, label: string): void {
 
