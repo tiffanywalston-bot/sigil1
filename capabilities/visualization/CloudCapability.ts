@@ -15,7 +15,7 @@ export class CloudCapability implements CapabilityDefinition {
     description: "Cloud visualization capability.",
     version: "GMC-1.0.0",
     defaultEnabled: true,
-  };
+  } as const;
   readonly enabled = true;
   readonly dependencies = ["visualization.geometry"] as const;
   readonly status: CapabilityStatus = {
