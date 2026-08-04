@@ -19,7 +19,7 @@
  * HarmonicTypes.ts.
  */
 
-import type { Frequency } from "./HarmonicTypes";
+import type { Frequency } from "../HarmonicTypes";
 
 const TWO_PI = Math.PI * 2;
 
