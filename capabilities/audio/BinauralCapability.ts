@@ -15,7 +15,7 @@ export class BinauralCapability implements CapabilityDefinition {
     description: "Binaural audio capability.",
     version: "GMC-1.0.0",
     defaultEnabled: true,
-  };
+  } as const;
   readonly enabled = true;
   readonly dependencies = ["audio.frequency"] as const;
   readonly status: CapabilityStatus = {
