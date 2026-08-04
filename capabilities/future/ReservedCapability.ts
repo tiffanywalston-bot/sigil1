@@ -15,7 +15,7 @@ export class ReservedCapability implements CapabilityDefinition {
     description: "Reserved future capability.",
     version: "GMC-1.0.0",
     defaultEnabled: false,
-  };
+  } as const;
   readonly enabled = false;
   readonly dependencies = [] as const;
   readonly status: CapabilityStatus = {
