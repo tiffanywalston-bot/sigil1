@@ -15,7 +15,7 @@ export class ImageCapability implements CapabilityDefinition {
     description: "Image export capability.",
     version: "GMC-1.0.0",
     defaultEnabled: true,
-  };
+  } as const;
   readonly enabled = true;
   readonly dependencies = ["visualization.geometry"] as const;
   readonly status: CapabilityStatus = {
