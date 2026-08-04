@@ -24,7 +24,7 @@
  * Vector.ts and HarmonicTypes.ts.
  */
 
-import type { Frequency, FrequencyRange } from "./HarmonicTypes";
+import type { Frequency, FrequencyRange } from "../HarmonicTypes";
 
 const MAX_NORMALIZE_ITERATIONS = 1024;
 
