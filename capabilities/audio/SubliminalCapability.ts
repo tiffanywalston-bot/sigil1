@@ -15,7 +15,7 @@ export class SubliminalCapability implements CapabilityDefinition {
     description: "Subliminal audio capability.",
     version: "GMC-1.0.0",
     defaultEnabled: false,
-  };
+  } as const;
   readonly enabled = false;
   readonly dependencies = ["audio.frequency"] as const;
   readonly status: CapabilityStatus = {
