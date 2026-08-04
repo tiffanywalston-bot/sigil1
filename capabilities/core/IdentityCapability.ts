@@ -15,7 +15,7 @@ export class IdentityCapability implements CapabilityDefinition {
     description: "Core identity capability.",
     version: "GMC-1.0.0",
     defaultEnabled: true,
-  };
+  } as const;
   readonly enabled = true;
   readonly dependencies = [] as const;
   readonly status: CapabilityStatus = {
