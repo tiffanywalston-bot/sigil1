@@ -12,7 +12,7 @@ export * from "./core/IdentityCapability";
 export * from "./core/MemoryCapability";
 export * from "./core/ValidationCapability";
 
-export * from "./audio/FrequencyCapability";
+export * from "./core/FrequencyCapability";
 export * from "./audio/BinauralCapability";
 export * from "./audio/SubliminalCapability";
 
