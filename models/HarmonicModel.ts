@@ -30,7 +30,7 @@
  * embedded objects.
  */
 
-import type { Frequency } from "./HarmonicTypes";
+import type { Frequency } from "../HarmonicTypes";
 
 export type HarmonicWaveform =
     | "SINE"
