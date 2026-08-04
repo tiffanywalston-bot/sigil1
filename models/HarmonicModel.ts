@@ -12,25 +12,19 @@
  *
  * Represents stored harmonic data only.
  *
- * Reuses Frequency from HarmonicTypes.ts. See the flag below
- * on the other fields: I could only confirm Frequency (and,
- * in earlier locked files, HarmonicWave) as actual exports of
- * HarmonicTypes.ts from how prior files used it — I have not
- * seen HarmonicTypes.ts's full contents directly. Rather than
- * guess at type names (Resonance, Phase, Amplitude, Waveform)
- * that may or may not exist there and risk a broken import,
- * amplitude/phase/resonance are plain numbers here (matching
- * how WaveMath.ts and HarmonicMath.ts already treat them),
- * and waveform is a small local union covering only the
- * waveforms WaveMath.ts actually implements today.
- * harmonicFamily is an id reference (e.g. into
+ * Reuses Frequency, Amplitude, Phase, and Resonance from
+ * HarmonicTypes.ts, which has been verified to export all
+ * four as { value: number } (Frequency additionally carries
+ * a unit: "Hz" field). waveform remains a small local union
+ * covering only the waveforms WaveMath.ts actually implements
+ * today. harmonicFamily is an id reference (e.g. into
  * FrequencyLibrary.ts's HARMONIC_FAMILY), not an embedded
  * list — consistent with this model layer's other files
  * (AudioModel.ts, UniverseModel.ts) storing ids rather than
  * embedded objects.
  */
 
-import type { Frequency } from "../HarmonicTypes";
+import type { Frequency, Amplitude, Phase, Resonance } from "../HarmonicTypes";
 
 export type HarmonicWaveform =
     | "SINE"
@@ -44,11 +38,11 @@ export interface HarmonicModel {
 
     readonly harmonicFamily: string | null;
 
-    readonly resonance: number;
+    readonly resonance: Resonance;
 
-    readonly phase: number;
+    readonly phase: Phase;
 
-    readonly amplitude: number;
+    readonly amplitude: Amplitude;
 
     readonly waveform: HarmonicWaveform;
 
