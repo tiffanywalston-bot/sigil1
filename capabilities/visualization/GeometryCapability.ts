@@ -15,7 +15,7 @@ export class GeometryCapability implements CapabilityDefinition {
     description: "Geometry visualization capability.",
     version: "GMC-1.0.0",
     defaultEnabled: true,
-  };
+  } as const;
   readonly enabled = true;
   readonly dependencies = [] as const;
   readonly status: CapabilityStatus = {
