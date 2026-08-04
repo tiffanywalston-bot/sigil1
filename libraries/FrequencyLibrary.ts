@@ -15,7 +15,7 @@
  * AI mappings, no session mappings, no user presets.
  */
 
-import type { Frequency, FrequencyRange } from "./HarmonicTypes";
+import type { Frequency, FrequencyRange } from "../HarmonicTypes";
 
 /* ---------- Reference Frequencies ---------- */
 
