@@ -299,26 +299,3 @@ export class CompositionRuntime {
     }
 
 }
-
-    /* ---------- Composition + Export ---------- */
-
-    /**
-     * Composes a session's audio and delegates export to the
-     * existing WAV pipeline (runtime/AudioExporter.ts). No
-     * encoding logic lives here.
-     */
-    static composeAndExport(
-        session: Session,
-        filename?: string
-    ): EncodedAudioExport {
-
-        const result = CompositionRuntime.compose(session);
-
-        return AudioExporter.buildExport(
-            result.buffer,
-            filename ?? `${result.presetId}-${session.id}`
-        );
-
-    }
-
-}
