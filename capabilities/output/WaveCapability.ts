@@ -15,7 +15,7 @@ export class WaveCapability implements CapabilityDefinition {
     description: "Wave audio output capability.",
     version: "GMC-1.0.0",
     defaultEnabled: true,
-  };
+  } as const;
   readonly enabled = true;
   readonly dependencies = ["audio.frequency"] as const;
   readonly status: CapabilityStatus = {
