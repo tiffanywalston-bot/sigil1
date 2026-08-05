@@ -18,7 +18,7 @@
  * redefining it.
  */
 
-import type { AudioPlaybackStatus } from "./AudioTypes";
+import type { AudioPlaybackStatus } from "../AudioTypes";
 
 export interface AudioModel {
 
