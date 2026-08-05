@@ -52,7 +52,7 @@
  * private to this file.
  */
 
-import type { ValidationIssue, ValidationResult } from "../ValidationTypes";
+import type { ValidationIssue, ValidationResult } from "./ValidationTypes";
 import { isObject, isNonEmptyString, isFiniteNumber, UnknownRecord } from "./ValidationHelpers";
 
 const HARMONIC_WAVEFORMS = ["SINE", "COSINE"] as const;
