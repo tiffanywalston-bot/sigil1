@@ -18,7 +18,7 @@
  * not claims about the physical universe.
  */
 
-import type { UniverseState } from "./UniverseTypes";
+import type { UniverseState } from "../UniverseTypes";
 
 export type UniverseLibraryCategory =
     | "PRIMARY"
