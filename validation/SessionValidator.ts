@@ -37,7 +37,7 @@
  * private to this file.
  */
 
-import type { ValidationIssue, ValidationResult } from "../ValidationTypes";
+import type { ValidationIssue, ValidationResult } from "./ValidationTypes";
 import { isObject, isNonEmptyString, isIso8601Timestamp, UnknownRecord } from "./ValidationHelpers";
 
 const SESSION_MODES = ["SOLO", "SHARED"] as const;
