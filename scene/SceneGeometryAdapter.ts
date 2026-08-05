@@ -11,10 +11,10 @@ import type {
   RingPosition,
   AxisLayout,
   ChainLayout,
-} from "../Geometry/GeometryMath";
+} from "../math/GeometryMath";
 
 import { DEFAULT_SCENE_CONFIG } from "./SceneConfig";
-import { buildGeometryLayout } from "../Geometry/GeometryMath";
+import { buildGeometryLayout } from "../math/GeometryMath";
 
 function adaptNode(pos: NodePosition, cfg: SceneConfig): SceneNode {
   return {
