@@ -7,9 +7,9 @@
  * No implementation.
  */
 
-import type { UniverseCollection } from "./UniverseTypes";
-import type { AudioState } from "./AudioTypes";
-import type { Session } from "./SessionTypes";
+import type { UniverseCollection } from "../UniverseTypes";
+import type { AudioState } from "../AudioTypes";
+import type { Session } from "../SessionTypes";
 
 /* ---------- Identifiable ---------- */
 
