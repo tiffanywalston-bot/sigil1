@@ -1,7 +1,7 @@
 // RendererValidator.ts
 // Validates SceneLayout before rendering. Never repairs data.
 
-import type { SceneLayout } from "../Scene/SceneTypes";
+import type { SceneLayout } from "../SceneTypes";
 
 export interface RendererValidationReport {
   valid: boolean;
