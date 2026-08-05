@@ -25,7 +25,7 @@
  * are internal helpers, not part of the public surface.
  */
 
-import type { ValidationIssue, ValidationResult } from "../ValidationTypes";
+import type { ValidationIssue, ValidationResult } from "./ValidationTypes";
 import { isObject, isNonEmptyString, isIso8601Timestamp, UnknownRecord } from "./ValidationHelpers";
 
 /* ---------- Required Fields ---------- */
