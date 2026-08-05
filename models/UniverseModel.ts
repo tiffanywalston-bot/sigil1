@@ -26,9 +26,9 @@ import type {
     UniverseBounds,
     UniverseConnection,
     UniverseField
-} from "./UniverseTypes";
+} from "../UniverseTypes";
 
-import type { Transform } from "./math/Transform";
+import type { Transform } from "../math/Transform";
 
 export interface UniverseModel {
 
