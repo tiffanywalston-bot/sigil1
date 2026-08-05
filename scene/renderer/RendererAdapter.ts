@@ -1,6 +1,6 @@
 // RendererAdapter.ts
 
-import type { SceneLayout, SceneNode } from "../Scene/SceneTypes";
+import type { SceneLayout, SceneNode } from "../SceneTypes";
 import type { DrawCommand, Material } from "./RendererTypes";
 import {
   DEFAULT_NODE_MATERIAL,
