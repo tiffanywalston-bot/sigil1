@@ -1,7 +1,7 @@
 import type {
   GeometryAxisId,
   GeometryChainId,
-} from "../Geometry/Sigil1GeometryGoldMaster_v1_0";
+} from "../geometry/Sigil1GeometryGoldMaster_v1_0";
 
 export type SceneId = string;
 
