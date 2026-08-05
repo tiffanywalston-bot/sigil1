@@ -23,7 +23,7 @@ import type {
     SessionState,
     SessionParticipant,
     SessionGoal
-} from "./SessionTypes";
+} from "../SessionTypes";
 
 export interface Session {
 
