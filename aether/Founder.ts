@@ -57,6 +57,7 @@ export class Founder {
     this.verifyAuthority();
 
     this.aether = await GenesisProtocol.execute(
+      FounderIdentity,
       compositionRuntime,
       context
     );
