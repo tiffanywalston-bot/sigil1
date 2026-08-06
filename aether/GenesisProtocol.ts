@@ -2,7 +2,7 @@
 //
 // Genesis Protocol
 // Executes the constitutional startup sequence:
-// Founder → Genesis Protocol → CapabilityBootstrap → CapabilityRegistry → FoundationAdapter → FoundationRuntime → FoundationRegistry → Aether (Initialized Engine)
+// Founder → GenesisProtocol → CapabilityBootstrap → CapabilityRegistry → FoundationAdapter → FoundationRuntime → FoundationRegistry → Aether (Initialized Engine)
 //
 // Genesis owns orchestration only. It does not implement subsystems.
 
@@ -10,58 +10,43 @@ import { CapabilityRegistry, CompositionRuntime } from "../foundation/Foundation
 import { FoundationAdapter, FoundationAdapterBundle } from "../foundation/FoundationAdapter";
 import { Aether, AetherFactory } from "./Aether";
 
-// Use the existing CapabilityBootstrap implementation from the runtime folder.
+// Correct repository path for CapabilityBootstrap
 import { CapabilityBootstrap } from "../runtime/CapabilityBootstrap";
 
-// Use the existing CapabilityContext type from the same place CapabilityBootstrap does.
-// This path must match the repository; it is not invented here.
-import { CapabilityContext } from "../runtime/CapabilityBootstrap";
+// Correct repository path for CapabilityContext
+// CapabilityBootstrap.ts imports CapabilityContext from capabilities/CapabilityTypes.ts
+import type { CapabilityContext } from "../capabilities/CapabilityTypes";
 
 export class GenesisProtocol {
-  /**
-   * Execute the constitutional startup.
-   *
-   * Responsibilities:
-   * 1. Verify Founder authority (performed by Founder before calling this method).
-   * 2. Initialize CapabilityBootstrap.
-   * 3. Acquire CapabilityRegistry.
-   * 4. Initialize FoundationAdapter.
-   * 5. Initialize FoundationRuntime (via FoundationAdapter).
-   * 6. Verify successful initialization.
-   * 7. Return a fully initialized Aether instance.
-   *
-   * CompositionRuntime is provided by the existing engine startup pathway
-   * and passed into Genesis rather than constructed here.
-   */
   static async execute(
     compositionRuntime: CompositionRuntime,
     context: CapabilityContext
   ): Promise<Aether> {
-    // 2. Initialize CapabilityBootstrap using the existing implementation.
+    // Use existing bootstrap implementation exactly as written in the ZIP
     const bootstrap = new CapabilityBootstrap();
 
     await bootstrap.initialize(context);
     await bootstrap.execute(context);
 
-    // 3. Acquire CapabilityRegistry from the existing bootstrap instance.
+    // Use the existing registry produced by CapabilityBootstrap
     const capabilityRegistry: CapabilityRegistry = bootstrap.registry;
 
-    // 4. Initialize FoundationAdapter using the existing constructor.
+    // Use the existing FoundationAdapter constructor
     const foundationAdapter = new FoundationAdapter({
       compositionRuntime,
       capabilityRegistry,
     });
 
-    // 5. Initialize FoundationRuntime (via FoundationAdapter).
+    // Use the existing FoundationAdapter initialization sequence
     const foundationBundle: FoundationAdapterBundle = foundationAdapter.initialize();
 
-    // 6. Verify successful initialization.
+    // Minimal constitutional verification
     GenesisProtocol.verifyInitialization(
       capabilityRegistry,
       foundationBundle
     );
 
-    // 7. Return a fully initialized Aether instance using AetherFactory.
+    // Return the initialized Aether instance
     return AetherFactory.create(
       compositionRuntime,
       capabilityRegistry,
@@ -84,8 +69,5 @@ export class GenesisProtocol {
     if (!foundationBundle.registry) {
       throw new Error("GenesisProtocol: FoundationRegistry is not initialized.");
     }
-
-    // Verification is intentionally minimal to avoid redesigning
-    // existing subsystem behavior.
   }
 }
