@@ -1,4 +1,5 @@
-// foundation/FoundationRuntime.ts
+// FILE: foundation/FoundationRuntime.ts
+// (only change: PrimaryAttunementPresetName added to the import list)
 
 import {
   FoundationRuntimeInterface,
@@ -7,6 +8,7 @@ import {
   FoundationLayerState,
   FoundationEvent,
   PrimaryAttunementPreset,
+  PrimaryAttunementPresetName,
 } from "./FoundationTypes";
 import {
   INTERPOLATION_DEFAULT_DURATION_MS,
