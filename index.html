@@ -1,132 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
+<script type="module">
 
-<head>
+    import { Engine } from "./engine.js";
 
-    <meta charset="UTF-8">
+    const engine = new Engine();
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    window.addEventListener("load", async () => {
 
-    <title>SIGIL1</title>
+        document
+            .getElementById("loading")
+            .style.display = "none";
 
-    <link rel="stylesheet"
-          href="style.css">
-
-</head>
-
-<body>
-
-    <!-- Main Canvas -->
-
-    <canvas id="sigil1"></canvas>
-
-    <!-- Loading Overlay -->
-
-    <div id="loading">
-
-        <div class="logo">
-
-            SIGIL1
-
-        </div>
-
-        <div class="status">
-
-            Initializing Engine...
-
-        </div>
-
-    </div>
-
-    <!-- ========================================================= -->
-    <!-- Subliminal Panel -->
-    <!-- ========================================================= -->
-
-    <div id="subliminal-panel">
-
-        <div class="sub-title">
-
-            Subliminal Generator
-
-        </div>
-
-        <label for="subliminal-content">
-
-            Subliminal Content
-
-        </label>
-
-        <textarea
-            id="subliminal-content"
-            rows="4"
-            placeholder="Enter subliminal affirmations..."></textarea>
-
-        <label for="subliminal-gain">
-
-            Gain
-
-        </label>
-
-        <input
-            id="subliminal-gain"
-            type="number"
-            min="0"
-            max="1"
-            step="0.01"
-            value="0.05">
-
-        <button id="subliminal-generate">
-
-            Generate Subliminal WAV
-
-        </button>
-
-        <div id="subliminal-output"></div>
-
-        <a
-            id="subliminal-download"
-            href="#"
-            download
-            style="display:none;"></a>
-
-        <div class="sub-note">
-
-            Uses the existing SIGIL1 audio pipeline.
-
-        </div>
-
-    </div>
-
-    <script type="module">
-
-        import { Engine } from "./engine.js";
-
-        const engine = new Engine();
-
-        window.addEventListener("load", async () => {
-
+        try {
+            const startPromise = engine.start();
+            const timeoutPromise = new Promise((_, reject) => 
+                setTimeout(() => reject(new Error("Startup timeout after 5 seconds")), 5000)
+            );
+            await Promise.race([startPromise, timeoutPromise]);
+        } catch (error) {
+            console.error("Engine startup failed:", error);
             document
                 .getElementById("loading")
-                .style.display = "none";
+                .style.display = "flex";
+            document
+                .querySelector("#loading .status")
+                .textContent =
+                    `Engine startup failed: ${error instanceof Error ? error.message : String(error)}`;
+        }
 
-            try {
-                await engine.start();
-            } catch (error) {
-                console.error("Engine startup failed:", error);
-                document
-                    .getElementById("loading")
-                    .style.display = "flex";
-                document
-                    .querySelector("#loading .status")
-                    .textContent =
-                        `Engine startup failed: ${error instanceof Error ? error.message : String(error)}`;
-            }
+    });
 
-        });
-
-    </script>
-
-</body>
-
-</html>
+</script>
