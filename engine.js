@@ -84,7 +84,15 @@ export class Engine {
         // getSession() returns null until a session is set via
         // setSession(); the panel reports that state rather than
         // fabricating a Session.
-        SubliminalPanel.attach(() => this.session);
+        //
+        // SubliminalPanel is an optional UI component and must not block
+        // engine startup. If attach() fails, catch and continue: the
+        // render loop starts regardless of UI readiness.
+        try {
+            SubliminalPanel.attach(() => this.session);
+        } catch (error) {
+            // Optional UI component failed. Render loop continues.
+        }
 
         this.running = true;
 
