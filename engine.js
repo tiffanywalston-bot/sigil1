@@ -1,4 +1,3 @@
-// FILE: engine.js
 /**
  * ============================================================
  * SIGIL1 Engine
@@ -26,6 +25,11 @@ import { Animation } from "./animation.js";
 import { Founder } from "./aether/Founder";
 import { CompositionRuntimeBridge } from "./runtime/CompositionRuntimeBridge";
 
+// UI surface for subliminal generation. Display/troubleshooting only —
+// all audio work stays in the existing pipeline (SubliminalCapability ->
+// CompositionRuntime/AudioRuntime -> WavEncoder -> AudioExporter).
+import { SubliminalPanel } from "./ui/SubliminalPanel";
+
 export class Engine {
 
     constructor() {
@@ -49,6 +53,16 @@ export class Engine {
         // startup sequence.
         this.aether = null;
 
+        // Active session, set by the host via setSession(). The
+        // repository has no session factory, so this is deliberately
+        // left null rather than invented here.
+        this.session = null;
+
+    }
+
+    /** Sets the active Session used by session-scoped capabilities. */
+    setSession(session) {
+        this.session = session;
     }
 
     async start() {
@@ -65,6 +79,12 @@ export class Engine {
         const context = { engineId: "sigil1" };
 
         this.aether = await Founder.getInstance().startEngine(compositionRuntime, context);
+
+        // Surface subliminal generation once the engine is initialized.
+        // getSession() returns null until a session is set via
+        // setSession(); the panel reports that state rather than
+        // fabricating a Session.
+        SubliminalPanel.attach(() => this.session);
 
         this.running = true;
 
