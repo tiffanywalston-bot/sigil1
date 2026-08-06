@@ -1,6 +1,3 @@
-// FILE: foundation/FoundationRuntime.ts
-// (only change: PrimaryAttunementPresetName added to the import list)
-
 import {
   FoundationRuntimeInterface,
   FoundationLayer,
