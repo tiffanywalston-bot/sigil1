@@ -39,7 +39,9 @@
 
     </div>
 
+    <!-- ========================================================= -->
     <!-- Subliminal Panel -->
+    <!-- ========================================================= -->
 
     <div id="subliminal-panel">
 
@@ -58,7 +60,7 @@
         <textarea
             id="subliminal-content"
             rows="4"
-            placeholder="Enter subliminal text..."></textarea>
+            placeholder="Enter subliminal affirmations..."></textarea>
 
         <label for="subliminal-gain">
 
@@ -69,6 +71,8 @@
         <input
             id="subliminal-gain"
             type="number"
+            min="0"
+            max="1"
             step="0.01"
             value="0.05">
 
@@ -78,16 +82,13 @@
 
         </button>
 
-        <div id="subliminal-output"
-             style="display:none;">
+        <div id="subliminal-output"></div>
 
-        </div>
-
-        <a id="subliminal-download"
-           href="#"
-           style="display:none;">
-
-        </a>
+        <a
+            id="subliminal-download"
+            href="#"
+            download
+            style="display:none;"></a>
 
         <div class="sub-note">
 
