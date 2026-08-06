@@ -39,6 +39,64 @@
 
     </div>
 
+    <!-- Subliminal Panel -->
+
+    <div id="subliminal-panel">
+
+        <div class="sub-title">
+
+            Subliminal Generator
+
+        </div>
+
+        <label for="subliminal-content">
+
+            Subliminal Content
+
+        </label>
+
+        <textarea
+            id="subliminal-content"
+            rows="4"
+            placeholder="Enter subliminal text..."></textarea>
+
+        <label for="subliminal-gain">
+
+            Gain
+
+        </label>
+
+        <input
+            id="subliminal-gain"
+            type="number"
+            step="0.01"
+            value="0.05">
+
+        <button id="subliminal-generate">
+
+            Generate Subliminal WAV
+
+        </button>
+
+        <div id="subliminal-output"
+             style="display:none;">
+
+        </div>
+
+        <a id="subliminal-download"
+           href="#"
+           style="display:none;">
+
+        </a>
+
+        <div class="sub-note">
+
+            Uses the existing SIGIL1 audio pipeline.
+
+        </div>
+
+    </div>
+
     <script type="module">
 
         import { Engine } from "./engine.js";
