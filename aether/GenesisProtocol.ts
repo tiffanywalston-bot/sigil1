@@ -1,4 +1,4 @@
-// FILE: aether/GenesisProtocol.ts
+// aether/GenesisProtocol.ts
 //
 // Genesis Protocol
 // Executes the constitutional startup sequence:
@@ -9,6 +9,8 @@
 import { CapabilityRegistry, CompositionRuntime } from "../foundation/FoundationTypes";
 import { FoundationAdapter, FoundationAdapterBundle } from "../foundation/FoundationAdapter";
 import { Aether, AetherFactory } from "./Aether";
+
+import type { FounderIdentityRecord } from "./FounderIdentity";
 
 // Correct repository path for CapabilityBootstrap
 import { CapabilityBootstrap } from "../runtime/CapabilityBootstrap";
@@ -26,6 +28,7 @@ import type { CapabilityContext } from "../capabilities/CapabilityTypes";
 
 export class GenesisProtocol {
   static async execute(
+    founderIdentity: FounderIdentityRecord,
     compositionRuntime: CompositionRuntime,
     context: CapabilityContext
   ): Promise<Aether> {
@@ -59,6 +62,7 @@ export class GenesisProtocol {
 
     // Return the initialized Aether instance
     return AetherFactory.create(
+      founderIdentity,
       compositionRuntime,
       capabilityRegistry,
       foundationBundle
