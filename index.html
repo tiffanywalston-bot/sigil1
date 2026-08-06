@@ -104,13 +104,24 @@
 
         const engine = new Engine();
 
-        window.addEventListener("load", () => {
+        window.addEventListener("load", async () => {
 
             document
                 .getElementById("loading")
                 .style.display = "none";
 
-            engine.start();
+            try {
+                await engine.start();
+            } catch (error) {
+                console.error("Engine startup failed:", error);
+                document
+                    .getElementById("loading")
+                    .style.display = "flex";
+                document
+                    .querySelector("#loading .status")
+                    .textContent =
+                        `Engine startup failed: ${error instanceof Error ? error.message : String(error)}`;
+            }
 
         });
 
