@@ -1,0 +1,74 @@
+// FILE: tsconfig.json  (NEW)
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+
+    // engine.js is plain JavaScript and imports TypeScript modules
+    // (aether/Founder, runtime/CompositionRuntimeBridge). allowJs lets
+    // those .js files participate in the same module graph. checkJs is
+    // left off deliberately: the existing .js rendering files
+    // (renderer.js, scene.js, crystals.js, etc.) were never written to
+    // type-check, and turning it on would report pre-existing errors
+    // unrelated to the constitutional integration.
+    "allowJs": true,
+    "checkJs": false,
+
+    // The repository's existing .ts files import each other without file
+    // extensions (e.g. Founder.ts: import { GenesisProtocol } from
+    // "./GenesisProtocol"). "bundler" resolution above supports that, so
+    // no existing import statement needs to change.
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+
+    // strict is OFF to match the code as it exists today. The repository
+    // was not authored against strict mode (FoundationRuntime.ts uses
+    // non-null assertions on possibly-undefined layer state, and several
+    // capability files rely on implicit any). Enabling strict here would
+    // surface a large volume of pre-existing errors that are out of scope
+    // for constitutional integration. Turning it on later is a separate,
+    // deliberate cleanup task.
+    "strict": false,
+
+    "noEmit": true
+  },
+
+  // NOTE — `npm run typecheck` currently reports 9 PRE-EXISTING errors in
+  // 4 files that are NOT part of the constitutional integration and were
+  // never modified by it:
+  //   models/RendererModel.ts       -> imports './RendererTypes' (that file
+  //                                    lives at scene/renderer/RendererTypes.ts)
+  //   scene/SceneGeometryAdapter.ts -> imports 5 members from
+  //                                    '../math/GeometryMath' that it does
+  //                                    not export
+  //   scene/SceneGraph.ts           -> a 13-byte stub; not a module
+  //   scene/SceneIndex.ts           -> re-exports the above stub
+  //   validation/RendererValidator.ts -> imports '../ValidationTypes'
+  //                                    (that file lives at
+  //                                    validation/ValidationTypes.ts)
+  // These are left visible on purpose rather than hidden behind a narrowed
+  // `include`, so the repository's real state is not misrepresented. The
+  // constitutional path itself (aether/, foundation/, runtime/,
+  // capabilities/) type-checks with ZERO errors.
+  "include": [
+    "aether/**/*.ts",
+    "foundation/**/*.ts",
+    "runtime/**/*.ts",
+    "capabilities/**/*.ts",
+    "scene/**/*.ts",
+    "math/**/*.ts",
+    "models/**/*.ts",
+    "geometry/**/*.ts",
+    "libraries/**/*.ts",
+    "validation/**/*.ts",
+    "interfaces/**/*.ts",
+    "integrity/**/*.ts",
+    "*.ts",
+    "engine.js"
+  ]
+}
