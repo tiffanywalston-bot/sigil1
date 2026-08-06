@@ -1,101 +1,23 @@
 // aether/Founder.ts
 //
 // Founder
-// Authoritative singleton that owns engine lifecycle and authorizes startup/shutdown.
-// Founder does NOT initialize subsystems directly and does NOT contain business logic.
-// It issues authority and invokes the Genesis Protocol.
-
-import { GenesisProtocol } from "./GenesisProtocol";
-import { Aether } from "./Aether";
-
-import type { CompositionRuntime } from "../foundation/FoundationTypes";
-import type { CapabilityContext } from "../capabilities/CapabilityTypes";
-
-export class Founder {
-  private static instance: Founder | null = null;
-  private aether: Aether | null = null;
-  private started = false;
-
-  private constructor() {
-    // Private to enforce singleton.
-  }
-
-  static getInstance(): Founder {
-    if (!Founder.instance) {
-      Founder.instance = new Founder();
-    }
-    return Founder.instance;
-  }
-
-  /**
-   * Authorize engine startup and invoke Genesis Protocol.
-   * Returns the fully initialized Aether instance.
-   *
-   * Founder does not construct CompositionRuntime or CapabilityContext.
-   * They must be provided by the engine startup pathway.
-   */
-  async startEngine(
-    compositionRuntime: CompositionRuntime,
-    context: CapabilityContext
-  ): Promise<Aether> {
-    if (this.started && this.aether) {
-      return this.aether;
-    }
-
-    // Founder authorizes startup.
-    this.verifyAuthority();
-
-    // Invoke Genesis Protocol with the correct signature.
-    this.aether = await GenesisProtocol.execute(compositionRuntime, context);
-    this.started = true;
-
-    return this.aether;
-  }
-
-  /**
-   * Authorize engine shutdown.
-   * This does not dismantle subsystems; it only marks lifecycle state.
-   */
-  shutdownEngine(): void {
-    this.verifyAuthority();
-    this.started = false;
-  }
-
-  /**
-   * Authority verification.
-   * In this constitutional skeleton, authority is implicit.
-   * This method exists to preserve the architectural contract.
-   */
-  private verifyAuthority(): void {
-    // No-op in this skeleton; real authority checks would be additive.
-  }
-
-  /**
-   * Accessor for the initialized Aether instance.
-   * Returns null if the engine has not been started.
-   */
-  getAether(): Aether | null {
-    return this.aether;
-  }
-}
-```**aether/Founder.ts**
-
-```ts
-// aether/Founder.ts
+// Authoritative singleton that owns engine lifecycle and authorizes
+// startup/shutdown.
 //
-// Founder
-// Authoritative singleton that owns engine lifecycle and authorizes startup/shutdown.
-// Founder does NOT initialize subsystems directly and does NOT contain business logic.
-// It issues authority and invokes the Genesis Protocol.
+// Founder owns constitutional authority verification.
+// Founder does NOT define constitutional identity.
+// FounderIdentity is the constitutional source of authority.
 
 import { GenesisProtocol } from "./GenesisProtocol";
 import { Aether } from "./Aether";
+import { FounderIdentity } from "./FounderIdentity";
 
 import type { CompositionRuntime } from "../foundation/FoundationTypes";
 import type { CapabilityContext } from "../capabilities/CapabilityTypes";
 
 export class Founder {
   private static instance: Founder | null = null;
+
   private aether: Aether | null = null;
   private started = false;
 
@@ -107,15 +29,22 @@ export class Founder {
     if (!Founder.instance) {
       Founder.instance = new Founder();
     }
+
     return Founder.instance;
   }
 
   /**
-   * Authorize engine startup and invoke Genesis Protocol.
-   * Returns the fully initialized Aether instance.
+   * Constitutional identity for this Founder.
+   */
+  getIdentity() {
+    return FounderIdentity;
+  }
+
+  /**
+   * Authorize engine startup.
    *
-   * Founder does not construct CompositionRuntime or CapabilityContext.
-   * They must be provided by the engine startup pathway.
+   * Founder verifies constitutional authority before delegating
+   * orchestration to GenesisProtocol.
    */
   async startEngine(
     compositionRuntime: CompositionRuntime,
@@ -125,19 +54,20 @@ export class Founder {
       return this.aether;
     }
 
-    // Founder authorizes startup.
     this.verifyAuthority();
 
-    // Invoke Genesis Protocol with the correct signature.
-    this.aether = await GenesisProtocol.execute(compositionRuntime, context);
+    this.aether = await GenesisProtocol.execute(
+      compositionRuntime,
+      context
+    );
+
     this.started = true;
 
     return this.aether;
   }
 
   /**
-   * Authorize engine shutdown.
-   * This does not dismantle subsystems; it only marks lifecycle state.
+   * Constitutional shutdown authorization.
    */
   shutdownEngine(): void {
     this.verifyAuthority();
@@ -145,17 +75,49 @@ export class Founder {
   }
 
   /**
-   * Authority verification.
-   * In this constitutional skeleton, authority is implicit.
-   * This method exists to preserve the architectural contract.
+   * Verify the constitutional Founder identity.
+   *
+   * Founder does not own identity.
+   * FounderIdentity is the constitutional authority record.
    */
   private verifyAuthority(): void {
-    // No-op in this skeleton; real authority checks would be additive.
+    if (!FounderIdentity) {
+      throw new Error(
+        "FounderIdentity is unavailable."
+      );
+    }
+
+    if (
+      FounderIdentity.signature !==
+      "FOUNDER::TIFFANY_ALEXIS_WALSTON"
+    ) {
+      throw new Error(
+        "Founder constitutional signature verification failed."
+      );
+    }
+
+    if (
+      FounderIdentity.constitutionalFounder !==
+      "Tiffany Alexis Walston"
+    ) {
+      throw new Error(
+        "Founder constitutional identity verification failed."
+      );
+    }
+
+    if (
+      !FounderIdentity.authorityScope.includes(
+        "AUTHORIZE_GENESIS"
+      )
+    ) {
+      throw new Error(
+        "Founder is not authorized to invoke Genesis."
+      );
+    }
   }
 
   /**
-   * Accessor for the initialized Aether instance.
-   * Returns null if the engine has not been started.
+   * Returns the initialized Aether instance.
    */
   getAether(): Aether | null {
     return this.aether;
