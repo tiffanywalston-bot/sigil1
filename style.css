@@ -150,3 +150,92 @@ body{
     }
 
 }
+/* ---------- Subliminal Panel ---------- */
+
+#subliminal-panel {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    width: 300px;
+    padding: 14px;
+    background: rgba(10, 10, 18, 0.88);
+    border: 1px solid rgba(160, 140, 255, 0.35);
+    border-radius: 8px;
+    color: #d8d4f0;
+    font: 12px/1.5 system-ui, sans-serif;
+    z-index: 10;
+}
+
+#subliminal-panel .sub-title {
+    font-size: 14px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+#subliminal-panel label {
+    display: block;
+    margin: 8px 0 3px;
+    opacity: 0.75;
+}
+
+#subliminal-panel textarea,
+#subliminal-panel input {
+    width: 100%;
+    box-sizing: border-box;
+    background: rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(160, 140, 255, 0.3);
+    border-radius: 4px;
+    color: #efeaff;
+    padding: 6px;
+    font: inherit;
+}
+
+#subliminal-panel button {
+    margin-top: 10px;
+    width: 100%;
+    padding: 7px;
+    background: rgba(120, 96, 220, 0.85);
+    border: 0;
+    border-radius: 4px;
+    color: #fff;
+    font: inherit;
+    cursor: pointer;
+}
+
+#subliminal-output {
+    margin-top: 10px;
+    border-top: 1px solid rgba(160, 140, 255, 0.25);
+    padding-top: 8px;
+}
+
+#subliminal-output .sub-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 1px 0;
+}
+
+#subliminal-output .sub-row span:first-child {
+    opacity: 0.65;
+}
+
+#subliminal-output .sub-warn {
+    margin-top: 8px;
+    padding: 6px;
+    background: rgba(200, 140, 60, 0.16);
+    border-left: 2px solid rgba(230, 170, 80, 0.8);
+    border-radius: 3px;
+}
+
+#subliminal-download {
+    display: inline-block;
+    margin-top: 8px;
+    color: #b9a8ff;
+}
+
+#subliminal-panel .sub-note {
+    margin-top: 10px;
+    font-size: 11px;
+    opacity: 0.6;
+}
